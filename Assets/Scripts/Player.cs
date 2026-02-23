@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         {
             GameObject groundCheckObj = new GameObject("GroundCheck");
             groundCheckObj.transform.SetParent(transform);
-            groundCheckObj.transform.localPosition = new Vector3(0, -1f, 0);
+            groundCheckObj.transform.localPosition = new Vector3(0, -0.65f, 0);
             groundCheck = groundCheckObj.transform;
         }
     }
@@ -50,7 +50,25 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.SphereCast(groundCheck.position, groundDistance, Vector3.down, 
+            out RaycastHit hitInfo, 0.15f, groundMask);
+        if(hitInfo.collider != null)
+        {
+            Debug.Log( hitInfo.collider.tag );
+            switch(hitInfo.collider.tag )
+            {
+                case "Fast":
+                    speed = 15;
+                    break;
+
+                case "Slow":
+                    speed = 5; break;
+
+                default:
+                    speed = 7; break;
+            }
+        }
         if (isGrounded && velocity.y < 0) velocity.y = -2f;
 
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
@@ -80,5 +98,14 @@ public class Player : MonoBehaviour
         // Unlock cursor
         if (Input.GetKeyDown(KeyCode.Escape))
             Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(groundCheck)
+        {
+            Gizmos.DrawSphere(groundCheck.position, groundDistance);
+        }
+
     }
 }
