@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     [Header("Ground Check")]
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundCheckRadius = 0.5f;
     public LayerMask groundMask;
 
     [Header("Camera")]
@@ -23,8 +23,16 @@ public class Player : MonoBehaviour
 
     private bool isGrounded;
 
+    bool bliper;
+    void ToggleBlip()
+    {
+        bliper = !bliper;
+    }
+
     private void Start()
     {
+        InvokeRepeating(nameof(ToggleBlip), 1f, 1f);
+
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -33,7 +41,7 @@ public class Player : MonoBehaviour
         {
             GameObject groundCheckObj = new GameObject("GroundCheck");
             groundCheckObj.transform.SetParent(transform);
-            groundCheckObj.transform.localPosition = new Vector3(0, -0.65f, 0);
+            groundCheckObj.transform.localPosition = new Vector3(0, groundCheckRadius - 1.05f, 0);
             groundCheck = groundCheckObj.transform;
         }
     }
@@ -51,7 +59,7 @@ public class Player : MonoBehaviour
     void Movement()
     {
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        isGrounded = Physics.SphereCast(groundCheck.position, groundDistance, Vector3.down, 
+        isGrounded = Physics.SphereCast(groundCheck.position, groundCheckRadius, Vector3.down, 
             out RaycastHit hitInfo, 0.15f, groundMask);
         if(hitInfo.collider != null)
         {
@@ -72,7 +80,7 @@ public class Player : MonoBehaviour
         if (isGrounded && velocity.y < 0) velocity.y = -2f;
 
         Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move((move * speed + velocity) * Time.deltaTime);
     }
     void Jump()
     {
@@ -93,7 +101,7 @@ public class Player : MonoBehaviour
 
         // Gravity
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+       // controller.Move(velocity * Time.deltaTime);
 
         // Unlock cursor
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -104,7 +112,16 @@ public class Player : MonoBehaviour
     {
         if(groundCheck)
         {
-            Gizmos.DrawSphere(groundCheck.position, groundDistance);
+            if(bliper)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(groundCheck.position, groundCheckRadius);
+            }
+            else
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(groundCheck.position + Vector3.down * 0.15f, groundCheckRadius);
+            }
         }
 
     }
