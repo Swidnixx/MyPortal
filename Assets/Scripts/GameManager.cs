@@ -53,4 +53,15 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    internal void AddClock(int timeToAdd)
+    {
+        time += timeToAdd;
+    }
+
+    internal void FreezeTime(int freezeTime)
+    {
+        CancelInvoke();
+        InvokeRepeating(nameof(Stopper), freezeTime, 1);
+    }
 }
