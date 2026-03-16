@@ -5,14 +5,18 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     [SerializeField] Portal otherPortal;
-    [SerializeField] Material material;
+    [SerializeField] MeshRenderer renderer;
 
-    public Camera myCamera;
+    Camera camera;
+    Transform playerCamera;
 
-    public Transform renderSurface;
-    public Transform portalCollider;
+    private void Update()
+    {
+        Matrix4x4 m = transform.localToWorldMatrix *
+            otherPortal.transform.worldToLocalMatrix *
+            playerCamera.localToWorldMatrix;
 
-    
-
+        camera.transform.SetPositionAndRotation(m.GetPosition(), m.rotation);
+    }
 
 }
