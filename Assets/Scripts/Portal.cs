@@ -7,8 +7,22 @@ public class Portal : MonoBehaviour
     [SerializeField] Portal otherPortal;
     [SerializeField] MeshRenderer renderer;
 
+    public PortalTeleport teleport;
+
     Camera camera;
     Transform playerCamera;
+
+    private void Start()
+    {
+        teleport.receiver = otherPortal.teleport.transform;
+        camera = GetComponentInChildren<UnityEngine.Camera>();
+        playerCamera = UnityEngine.Camera.main.transform;
+
+        RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 0);
+        camera.targetTexture = rt;
+        otherPortal.renderer.material.SetTexture("_MainTex", rt);
+    }
+
 
     private void Update()
     {
