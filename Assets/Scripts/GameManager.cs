@@ -64,4 +64,33 @@ public class GameManager : MonoBehaviour
         CancelInvoke();
         InvokeRepeating(nameof(Stopper), freezeTime, 1);
     }
+
+    public bool UseKey(KeyType keyType)
+    {
+        switch (keyType)
+        {
+            case KeyType.Gold:
+                if(GoldKeys > 0)
+                {
+                    GoldKeys--;
+                    return true;
+                }
+                break;
+            case KeyType.Silver:
+                if (SilverKeys > 0)
+                {
+                    SilverKeys--;
+                    return true;
+                }
+                break;
+            case KeyType.Bronze:
+                if (BronzeKeys > 0)
+                {
+                    BronzeKeys--;
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
 }
