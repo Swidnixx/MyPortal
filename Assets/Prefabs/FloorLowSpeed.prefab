@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 4232470587974189848}
   - component: {fileID: 5366132104610619174}
   - component: {fileID: 382363727757396794}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: PlaneLow
-  m_TagString: LevelElement
+  m_TagString: Slow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 4908387806323630172}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.45, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []

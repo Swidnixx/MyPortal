@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3061450454639648098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.61, y: -2.45, z: 5.32}
+  m_LocalPosition: {x: 35.61, y: 0, z: 5.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 5616890547679237026}
   - component: {fileID: 2006994501627634912}
   - component: {fileID: 5452620652434240972}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: PlaneHigh
-  m_TagString: LevelElement
+  m_TagString: Fast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 4096384494173812618}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.45, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
