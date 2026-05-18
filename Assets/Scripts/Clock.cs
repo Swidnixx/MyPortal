@@ -8,6 +8,6 @@ public class Clock : Pickup
     {
         base.Pick(); //Destroy
 
-        GameManager.Instance.AddClock(timeToAdd);
+        GameManager.Instance.AddTime(timeToAdd);
     }
 }

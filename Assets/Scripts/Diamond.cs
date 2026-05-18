@@ -6,6 +6,6 @@ public class Diamond : Pickup
     {
         base.Pick(); //Destroy
 
-        GameManager.Instance.AddDiamond();
+        GameManager.Instance.points++;
     }
 }

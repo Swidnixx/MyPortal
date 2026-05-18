@@ -24,8 +24,9 @@ public class LockMechanism : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                if(GameManager.Instance.UseKey(correctKey))
+                if(GameManager.Instance.HasKey(correctKey))
                 {
+                    GameManager.Instance.UseKey(correctKey);
                     OpenDoor();
                 }
             }
